@@ -15,6 +15,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
+bool _obsecureLogin = true;
+
 class _HomePageState extends State<HomePage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController loginEmailController = TextEditingController();
@@ -62,6 +64,7 @@ class _HomePageState extends State<HomePage> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
+                              fillColor: Colors.blue[100],
                               labelText: 'Email Address'),
                         ),
                       ),
@@ -69,13 +72,21 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                         child: TextField(
                           controller: loginPasswordController,
+                          obscureText: _obsecureLogin,
                           keyboardType: TextInputType.text,
                           decoration: InputDecoration(
                               prefixIcon: Icon(Icons.lock),
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10)),
+                              fillColor: Colors.red[100],
                               labelText: 'Password',
-                              suffixIcon: Icon(Icons.remove_red_eye)),
+                              suffixIcon: GestureDetector(
+                                  child: Icon(Icons.remove_red_eye),
+                                  onTap: () {
+                                    setState(() {
+                                      _obsecureLogin = !_obsecureLogin;
+                                    });
+                                  })),
                         ),
                       ),
                       Padding(
@@ -103,7 +114,7 @@ class _HomePageState extends State<HomePage> {
                             if (_isloading == true) {
                               if (loginEmailController.text ==
                                       "shanu18mps@gmail.com" &&
-                                  loginPasswordController.text == "123123") {
+                                  loginPasswordController.text == "123123456") {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(

@@ -34,6 +34,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                     prefixIcon: Icon(Icons.mail_outline),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
+                    fillColor: Colors.blue[100],
                     labelText: 'your email address'),
               ),
             ),
@@ -45,7 +46,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                       borderRadius: BorderRadius.circular(30)),
                   child: Text(
                     "Login",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.blue[100]),
                   ),
                   onPressed: () {
                     bool _isCorrect = false;

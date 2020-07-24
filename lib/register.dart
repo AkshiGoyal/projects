@@ -9,6 +9,8 @@ class Register extends StatefulWidget {
   _RegisterState createState() => _RegisterState();
 }
 
+bool _obsecureIn = true;
+
 class _RegisterState extends State<Register> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController singupMobileNumberController = TextEditingController();
@@ -44,6 +46,7 @@ class _RegisterState extends State<Register> {
                     prefixIcon: Icon(Icons.person_outline),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
+                    fillColor: Colors.blue[100],
                     labelText: 'Username'),
               ),
             ),
@@ -56,6 +59,7 @@ class _RegisterState extends State<Register> {
                     prefixIcon: Icon(Icons.phone),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
+                    fillColor: Colors.blue[100],
                     labelText: 'Mobile Number'),
               ),
             ),
@@ -68,6 +72,7 @@ class _RegisterState extends State<Register> {
                     prefixIcon: Icon(Icons.person_outline),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
+                    fillColor: Colors.blue[100],
                     labelText: ('Email'),
                   )),
             ),
@@ -76,13 +81,21 @@ class _RegisterState extends State<Register> {
               child: TextField(
                 controller: signupPasswordController,
                 keyboardType: TextInputType.text,
+                obscureText: _obsecureIn,
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
+                    fillColor: Colors.blue[100],
                     labelText: 'Password',
-                    suffixIcon:
-                        GestureDetector(child: Icon(Icons.remove_red_eye))),
+                    suffixIcon: GestureDetector(
+                        child: GestureDetector(
+                            child: Icon(Icons.remove_red_eye),
+                            onTap: () {
+                              setState(() {
+                                _obsecureIn = !_obsecureIn;
+                              });
+                            }))),
               ),
             ),
             Padding(

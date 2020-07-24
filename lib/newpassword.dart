@@ -7,6 +7,9 @@ class NewPassword extends StatefulWidget {
   _NewPasswordState createState() => _NewPasswordState();
 }
 
+bool _obscureTextLogin1 = true;
+bool _obscureTextLogin2 = true;
+
 class _NewPasswordState extends State<NewPassword> {
   @override
   Widget build(BuildContext context) {
@@ -23,13 +26,21 @@ class _NewPasswordState extends State<NewPassword> {
               padding: const EdgeInsets.fromLTRB(30, 250, 30, 20),
               child: TextField(
                 controller: changePasswordController1,
+                obscureText: _obscureTextLogin1,
                 keyboardType: TextInputType.text,
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
+                    fillColor: Colors.white,
                     labelText: 'New Password',
-                    suffixIcon: Icon(Icons.remove_red_eye)),
+                    suffixIcon: GestureDetector(
+                        child: Icon(Icons.remove_red_eye),
+                        onTap: () {
+                          setState(() {
+                            _obscureTextLogin1 = !_obscureTextLogin1;
+                          });
+                        })),
               ),
             ),
             Padding(
@@ -37,12 +48,17 @@ class _NewPasswordState extends State<NewPassword> {
               child: TextField(
                 controller: changePasswordController2,
                 keyboardType: TextInputType.text,
+                obscureText: _obscureTextLogin2,
                 decoration: InputDecoration(
                     prefixIcon: Icon(Icons.lock),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10)),
+                    fillColor: Colors.white,
                     labelText: 'Confirm Password',
                     suffixIcon: GestureDetector(
+                      onTap: () {
+                        //
+                      },
                       child: Icon(Icons.remove_red_eye),
                     )),
               ),
@@ -55,7 +71,7 @@ class _NewPasswordState extends State<NewPassword> {
                       borderRadius: BorderRadius.circular(30)),
                   child: Text(
                     "Proceed",
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Colors.blue[100]),
                   ),
                   onPressed: () {
                     bool _isCorrect = false;
